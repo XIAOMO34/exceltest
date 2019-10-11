@@ -3,12 +3,14 @@
     Dim myworkbook As Microsoft.Office.Interop.Excel.Workbook
     Dim myworksheet As Microsoft.Office.Interop.Excel.Worksheet
     Dim myword As Microsoft.Office.Interop.Word.Application
+    Dim myworddoc As Microsoft.Office.Interop.Word.Document
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
             ''获得已经打开的EXCEL对象
             Step21()
             Wmassout()
+            'Duquword()
             'Step3()
             Me.Close()
         Catch ex As Exception
@@ -27,8 +29,8 @@
         Wmassout()
     End Function
     Function Wmassout() ''读取Wmass文件中信息
-        'myworkbook = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\新建 Microsoft Excel 工作表.xlsx")
-        'myworksheet = myworkbook.Worksheets("Sheet1")
+        myworkbook = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\新建 Microsoft Excel 工作表.xlsx")
+        myworksheet = myworkbook.Worksheets("Sheet1")
         Dim REG As Microsoft.Office.Interop.Excel.Range
         REG = myworksheet.Range("A1:A500")
         For Each i In REG
@@ -40,6 +42,13 @@
             End If
         Next
         myword = CreateObject("Word.application")
+        myword.Visible = True
+        myworddoc = myword.Documents.Open("C:\Users\LJX\Desktop\新建 Microsoft Word 文档.docx")
+    End Function
+    Function Duquword()
+        myword = CreateObject("Word.application")
+        myword.Visible = True
+        myworddoc = myword.Documents.Open("C:\Users\LJX\Desktop\新建 Microsoft Word 文档.docx")
 
     End Function
 End Class
