@@ -62,9 +62,19 @@
                 myworksheet.Range("B1").Select()
                 myworkbook.ActiveSheet.PASTE
                 myexcel.Selection.texttocolumns(,,,,,,, True,,,,,,)
-                myworksheet.Range("G1:H2").Copy()
+                'myworksheet.Range("G1:H2").Copy()
             End If
         Next
+        Dim reg2 As Microsoft.Office.Interop.Excel.Range
+        Dim K As Integer
+        K = 0
+        reg2 = myworksheet.Range("G1:G1000")
+        For Each j In reg2 ''k为楼层数
+            If j.VALUE IsNot Nothing Then
+                K = K + 1
+            End If
+        Next
+        myworksheet.Range("G1:H" & K).Copy()
         myword = CreateObject("Word.application")
         myword.Visible = True
         myworddoc = myword.Documents.Open("C:\Users\LJX\Desktop\新建 Microsoft Word 文档.docx")
@@ -80,15 +90,6 @@
     Private Sub BunifuImageButton1_Click(sender As Object, e As EventArgs) Handles BunifuImageButton1.Click
         Me.Close()
     End Sub
-
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
-        OpenFileDialog1.Filter = "所有文件|*.*" ''文件筛选器，只选择xlsx文件
-        OpenFileDialog1.ShowDialog()
-        If OpenFileDialog1.FileName <> "OpenFileDialog1" Then
-            TextBox1.Text = "文件已选择：" & OpenFileDialog1.FileName
-        End If
-    End Sub
-
     Private Sub BunifuFlatButton3_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton3.Click
         ''关闭excel进程，释放内存
         Dim p As Process() = Process.GetProcessesByName("EXCEL")
@@ -100,15 +101,12 @@
             i.Kill()
         Next
     End Sub
-End Class
-'Private Sub BunifuFlatButton4_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton4.Click
-'    If OpenFileDialog1.FileName = "OpenFileDialog1" Then
-'        MsgBox("未选择文件！")
-'    Else
-'        Useexcel()
-'        Createduantou()
-'    End If
-'End Sub
-''参数表显示
 
-'End Sub
+    Private Sub BunifuFlatButton4_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton4.Click
+        OpenFileDialog1.Filter = "所有文件|*.*" ''文件筛选器
+        OpenFileDialog1.ShowDialog()
+        If OpenFileDialog1.FileName <> "OpenFileDialog1" Then
+            TextBox1.Text = "文件已选择：" & OpenFileDialog1.FileName
+        End If
+    End Sub
+End Class
