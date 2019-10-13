@@ -101,11 +101,11 @@ Partial Class Form1
         'BunifuFlatButton3
         '
         Me.BunifuFlatButton3.Activecolor = System.Drawing.SystemColors.ActiveCaption
-        Me.BunifuFlatButton3.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BunifuFlatButton3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.BunifuFlatButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BunifuFlatButton3.BorderRadius = 0
         Me.BunifuFlatButton3.ButtonText = "  关闭所有office进程"
-        Me.BunifuFlatButton3.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BunifuFlatButton3.Cursor = System.Windows.Forms.Cursors.AppStarting
         Me.BunifuFlatButton3.DisabledColor = System.Drawing.Color.Gray
         Me.BunifuFlatButton3.Iconcolor = System.Drawing.Color.Transparent
         Me.BunifuFlatButton3.Iconimage = Nothing
@@ -121,7 +121,7 @@ Partial Class Form1
         Me.BunifuFlatButton3.IsTab = False
         Me.BunifuFlatButton3.Location = New System.Drawing.Point(0, 205)
         Me.BunifuFlatButton3.Name = "BunifuFlatButton3"
-        Me.BunifuFlatButton3.Normalcolor = System.Drawing.SystemColors.ActiveCaption
+        Me.BunifuFlatButton3.Normalcolor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.BunifuFlatButton3.OnHovercolor = System.Drawing.SystemColors.ActiveBorder
         Me.BunifuFlatButton3.OnHoverTextColor = System.Drawing.Color.White
         Me.BunifuFlatButton3.selected = False
@@ -155,7 +155,7 @@ Partial Class Form1
         Me.BunifuFlatButton1.IsTab = False
         Me.BunifuFlatButton1.Location = New System.Drawing.Point(0, 75)
         Me.BunifuFlatButton1.Name = "BunifuFlatButton1"
-        Me.BunifuFlatButton1.Normalcolor = System.Drawing.SystemColors.ActiveCaption
+        Me.BunifuFlatButton1.Normalcolor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.BunifuFlatButton1.OnHovercolor = System.Drawing.SystemColors.ActiveBorder
         Me.BunifuFlatButton1.OnHoverTextColor = System.Drawing.Color.White
         Me.BunifuFlatButton1.selected = False
@@ -180,7 +180,7 @@ Partial Class Form1
         'BunifuFlatButton2
         '
         Me.BunifuFlatButton2.Activecolor = System.Drawing.SystemColors.ActiveCaption
-        Me.BunifuFlatButton2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BunifuFlatButton2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.BunifuFlatButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BunifuFlatButton2.BorderRadius = 0
         Me.BunifuFlatButton2.ButtonText = "生成到WORD"
@@ -200,7 +200,7 @@ Partial Class Form1
         Me.BunifuFlatButton2.IsTab = False
         Me.BunifuFlatButton2.Location = New System.Drawing.Point(49, 182)
         Me.BunifuFlatButton2.Name = "BunifuFlatButton2"
-        Me.BunifuFlatButton2.Normalcolor = System.Drawing.SystemColors.ActiveCaption
+        Me.BunifuFlatButton2.Normalcolor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.BunifuFlatButton2.OnHovercolor = System.Drawing.SystemColors.ActiveBorder
         Me.BunifuFlatButton2.OnHoverTextColor = System.Drawing.Color.Black
         Me.BunifuFlatButton2.selected = False
@@ -226,7 +226,7 @@ Partial Class Form1
         'BunifuFlatButton4
         '
         Me.BunifuFlatButton4.Activecolor = System.Drawing.SystemColors.ActiveCaption
-        Me.BunifuFlatButton4.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BunifuFlatButton4.BackColor = System.Drawing.SystemColors.Control
         Me.BunifuFlatButton4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BunifuFlatButton4.BorderRadius = 0
         Me.BunifuFlatButton4.ButtonText = "选择文件"
