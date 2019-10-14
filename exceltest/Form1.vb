@@ -109,4 +109,8 @@
             TextBox1.Text = "文件已选择：" & OpenFileDialog1.FileName
         End If
     End Sub
+
+    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
+
+    End Sub
 End Class
