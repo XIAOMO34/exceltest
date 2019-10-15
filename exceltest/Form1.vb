@@ -55,21 +55,27 @@
         myworksheet = myworkbook.Worksheets("Sheet1")
         Dim REG As Microsoft.Office.Interop.Excel.Range
         REG = myworksheet.Range("A1:A500")
-        For Each i In REG
-            If i.VALUE Like "* 恒载质量    活载质量*" Then ''关键词和通配符
-                'MessageBox.Show(i.ROW + 2)
+        For Each i In REG ''REG为所有单元格，遍历单元格
+            If i.VALUE Like "* 恒载质量    活载质量*" Then ''当出现* 恒载质量    活载质量*时
+                ''停止遍历,*为通配符
                 myworksheet.Range("A" & （i.ROW + 2) & ": A" & (i.ROW + 3)).Copy()
                 myworksheet.Range("B1").Select()
-                myworkbook.ActiveSheet.PASTE
+                myworkbook.ActiveSheet.PASTE ''复制所需的数据并进行处理
                 myexcel.Selection.texttocolumns(,,,,,,, True,,,,,,)
-                'myworksheet.Range("G1:H2").Copy()
+                myworksheet.Range("L1").Select()
+                myexcel.ActiveCell.FormulaR1C1 = "=G1+H1"
+                myworksheet.Range("L1").Select()
+                myexcel.Selection.AutoFill(myworksheet.Range("L1:L2"), 0)
+                myworksheet.Range("L1:L2").Copy()
+                Exit For ''跳出循环
             End If
         Next
         Dim reg2 As Microsoft.Office.Interop.Excel.Range
         Dim K As Integer
         K = 0
         reg2 = myworksheet.Range("G1:G1000")
-        For Each j In reg2 ''k为楼层数
+        For Each j In reg2 ''k为楼层数，对任意层数具有通用性
+
             If j.VALUE IsNot Nothing Then
                 K = K + 1
             End If
