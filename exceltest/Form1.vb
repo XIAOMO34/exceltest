@@ -63,34 +63,27 @@
                 myworkbook.ActiveSheet.PASTE ''复制所需的数据并进行处理
                 myexcel.Selection.texttocolumns(,,,,,,, True,,,,,,)
                 myworksheet.Range("L1").Select()
-                myexcel.ActiveCell.FormulaR1C1 = "=G1+H1"
+                myexcel.ActiveCell.FormulaR1C1 = "=RC[-5]+RC[-4]"
                 myworksheet.Range("L1").Select()
-                myexcel.Selection.AutoFill(myworksheet.Range("L1:L2"), 0)
-                myworksheet.Range("L1:L2").Copy()
                 Exit For ''跳出循环
             End If
         Next
         Dim reg2 As Microsoft.Office.Interop.Excel.Range
-        Dim K As Integer
-        K = 0
+        Dim C As Integer
+        C = 0
         reg2 = myworksheet.Range("G1:G1000")
-        For Each j In reg2 ''k为楼层数，对任意层数具有通用性
-
+        For Each j In reg2 ''C为楼层数，对任意层数具有通用性
             If j.VALUE IsNot Nothing Then
-                K = K + 1
+                C = C + 1
             End If
         Next
-        myworksheet.Range("G1:H" & K).Copy()
+        myexcel.Selection.AutoFill(myworksheet.Range("L1:L" & C))
+        myworksheet.Range("L1:L" & C).Copy()
         myword = CreateObject("Word.application")
         myword.Visible = True
-        myworddoc = myword.Documents.Open("C:\Users\LJX\Desktop\新建 Microsoft Word 文档.docx")
-        myword.Selection.PasteExcelTable(False, False, False)
-    End Function
-    Function Duquword()
-        myword = CreateObject("Word.application")
-        myword.Visible = True
-        myworddoc = myword.Documents.Open("C:\Users\LJX\Desktop\新建 Microsoft Word 文档.docx")
-        myword.Selection.PasteExcelTable(False, False, False)
+        myworddoc = myword.Documents.Open("C:\Users\LJX\Desktop\南通万科幼儿园北侧减震分析报告.docx")
+        'myword.Selection.GoTo(2, , 2, ) ''定位到指定表格
+        PASTE(2, C)
     End Function
 
     Private Sub BunifuImageButton1_Click(sender As Object, e As EventArgs) Handles BunifuImageButton1.Click
@@ -119,4 +112,12 @@
     Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
 
     End Sub
+    Function PASTE(a As Integer, b As Integer) ''a是表格号，b是楼层
+        Dim i As Integer
+        For i = 1 To b
+            myworksheet.Range("L" & i).Copy()
+            myworddoc.Tables(2).Cell(i + 1, 2).Select()
+            myword.Selection.PasteAndFormat(22)
+        Next
+    End Function
 End Class
