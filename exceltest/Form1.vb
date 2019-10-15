@@ -118,9 +118,13 @@
         Dim i As Integer
         For i = 1 To b
             myworksheet.Range("L" & i).Copy()
-            Sleep(100)
-            myworddoc.Tables(2).Cell(i + 1, 2).Select()
-            myword.Selection.PasteAndFormat(22)
+            Try
+                myworddoc.Tables(2).Cell(i + 1, 2).Select()
+                myword.Selection.PasteAndFormat(22)
+            Catch ex As Exception
+                myworddoc.Tables(2).Cell(i + 1, 2).Select()
+                myword.Selection.PasteAndFormat(22)
+            End Try
         Next
     End Function
 End Class
