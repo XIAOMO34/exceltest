@@ -5,6 +5,8 @@
     Dim myword As Microsoft.Office.Interop.Word.Application
     Dim myworddoc As Microsoft.Office.Interop.Word.Document
     ''窗口移动
+    Private Declare Sub Sleep Lib "kernel32" Alias "Sleep" (ByVal dwMilliseconds As Long)
+
     Public Declare Function SendMessage Lib "user32" Alias "SendMessageA" _
         (ByVal hwnd As IntPtr,
          ByVal wMsg As Integer,
@@ -116,6 +118,7 @@
         Dim i As Integer
         For i = 1 To b
             myworksheet.Range("L" & i).Copy()
+            Sleep(100)
             myworddoc.Tables(2).Cell(i + 1, 2).Select()
             myword.Selection.PasteAndFormat(22)
         Next
