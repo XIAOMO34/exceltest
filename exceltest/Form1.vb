@@ -1,23 +1,21 @@
-﻿Public Class Form1
+﻿Imports Microsoft.Office.Interop.Excel
+Imports Microsoft.Office.Interop.Word
+Public Class Form1
     Dim myexcel As Microsoft.Office.Interop.Excel.Application
     Dim myworkbook As Microsoft.Office.Interop.Excel.Workbook
     Dim myworksheet As Microsoft.Office.Interop.Excel.Worksheet
     Dim myword As Microsoft.Office.Interop.Word.Application
     Dim myworddoc As Microsoft.Office.Interop.Word.Document
     ''窗口移动
-    Private Declare Sub Sleep Lib "kernel32" Alias "Sleep" (ByVal dwMilliseconds As Long)
-
+    ''Private Declare Sub Sleep Lib "kernel32" Alias "Sleep" (ByVal dwMilliseconds As Long)暂停程序，单位：毫秒
     Public Declare Function SendMessage Lib "user32" Alias "SendMessageA" _
         (ByVal hwnd As IntPtr,
          ByVal wMsg As Integer,
          ByVal wParam As Integer,
          ByVal lParam As Integer) As Boolean
     Public Declare Function ReleaseCapture Lib "user32" Alias "ReleaseCapture" () As Boolean
-
     Public Const WM_SYSCOMMAND = &H112
-
     Public Const SC_MOVE = &HF010&
-
     Public Const HTCAPTION = 2
     Private Sub Panel1_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) _
         Handles Panel1.MouseDown
@@ -28,29 +26,34 @@
 
     End Sub
     Private Sub BunifuFlatButton2_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton2.Click
+        'Try
+        '    myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
+        '    ''获得已经打开的EXCEL对象
+        '    Step21()
+        '    Wmassout()
+        '    'Duquword()
+        '    'Step3()
+        '    Me.Close()
+        'Catch ex As Exception
         Try
             myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
-            ''获得已经打开的EXCEL对象
-            Step21()
-            Wmassout()
-            'Duquword()
-            'Step3()
-            Me.Close()
+            MessageBox.Show("EXCEL已经在运行!") ''提示已经打开EXCEL时应关闭进程
+            Exit Sub
         Catch ex As Exception
-            Step22()
+            Openexcel()
+            Wmassout()
         End Try
     End Sub
-    Function Step21()  ''对已经打开的表格操作,此处用函数不用进程来选择性调用！！
-        myexcel.WindowState = -4137 ''全屏
-        myworkbook = myexcel.ActiveWorkbook
-        myworksheet = myworkbook.Worksheets("Sheet1")
-    End Function
-    Function Step22() ''重新打开EXCEL顶级对象APPLICATION
+    'Function Step21()  ''对已经打开的表格操作,此处用函数不用进程来选择性调用！！
+    '    myexcel.WindowState = -4137 ''全屏
+    '    myworkbook = myexcel.ActiveWorkbook
+    '    myworksheet = myworkbook.Worksheets("myworkbook.Sheet1")
+    'End Function
+    Function Openexcel() ''重新打开EXCEL顶级对象APPLICATION
         myexcel = CreateObject("Excel.Application")
         myexcel.Visible = True
         myexcel.WindowState = -4137 ''全屏
         myworkbook = myexcel.Workbooks.Open(OpenFileDialog1.FileName)
-        Wmassout()
     End Function
     Function Wmassout() ''读取Wmass文件中信息
         ''myworkbook = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\新建 Microsoft Excel 工作表.xlsx")
@@ -80,12 +83,6 @@
             End If
         Next
         myexcel.Selection.AutoFill(myworksheet.Range("L1:L" & C))
-        myworksheet.Range("L1:L" & C).Copy()
-        myword = CreateObject("Word.application")
-        myword.Visible = True
-        myworddoc = myword.Documents.Open("C:\Users\LJX\Desktop\南通万科幼儿园北侧减震分析报告.docx")
-        'myword.Selection.GoTo(2, , 2, ) ''定位到指定表格
-        PASTE(2, C)
     End Function
 
     Private Sub BunifuImageButton1_Click(sender As Object, e As EventArgs) Handles BunifuImageButton1.Click
@@ -94,10 +91,10 @@
     Private Sub BunifuFlatButton3_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton3.Click
         ''关闭excel进程，释放内存
         Dim p As Process() = Process.GetProcessesByName("EXCEL")
-            For Each pr As Process In p
-                pr.Kill()
-            Next
-            Dim q As Process() = Process.GetProcessesByName("WINWORD")
+        For Each pr As Process In p
+            pr.Kill()
+        Next
+        Dim q As Process() = Process.GetProcessesByName("WINWORD")
         For Each i As Process In q
             i.Kill()
         Next
@@ -114,17 +111,7 @@
     Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
 
     End Sub
-    Function PASTE(a As Integer, b As Integer) ''a是表格号，b是楼层
-        Dim i As Integer
-        For i = 1 To b
-            myworksheet.Range("L" & i).Copy()
-            Try
-                myworddoc.Tables(2).Cell(i + 1, 2).Select()
-                myword.Selection.PasteAndFormat(22)
-            Catch ex As Exception
-                myworddoc.Tables(2).Cell(i + 1, 2).Select()
-                myword.Selection.PasteAndFormat(22)
-            End Try
-        Next
+    Function Xuanbo()
+
     End Function
 End Class
