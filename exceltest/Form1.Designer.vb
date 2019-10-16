@@ -44,7 +44,7 @@ Partial Class Form1
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.Highlight
+        Me.Panel1.BackColor = System.Drawing.Color.DodgerBlue
         Me.Panel1.Controls.Add(Me.BunifuImageButton1)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.PictureBox1)
@@ -56,7 +56,7 @@ Partial Class Form1
         '
         'BunifuImageButton1
         '
-        Me.BunifuImageButton1.BackColor = System.Drawing.SystemColors.Highlight
+        Me.BunifuImageButton1.BackColor = System.Drawing.Color.DodgerBlue
         Me.BunifuImageButton1.Image = CType(resources.GetObject("BunifuImageButton1.Image"), System.Drawing.Image)
         Me.BunifuImageButton1.ImageActive = Nothing
         Me.BunifuImageButton1.Location = New System.Drawing.Point(760, 0)
@@ -89,7 +89,7 @@ Partial Class Form1
         '
         'Panel2
         '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.Highlight
+        Me.Panel2.BackColor = System.Drawing.Color.White
         Me.Panel2.Controls.Add(Me.BunifuFlatButton3)
         Me.Panel2.Controls.Add(Me.BunifuFlatButton1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
@@ -101,7 +101,7 @@ Partial Class Form1
         'BunifuFlatButton3
         '
         Me.BunifuFlatButton3.Activecolor = System.Drawing.SystemColors.Highlight
-        Me.BunifuFlatButton3.BackColor = System.Drawing.SystemColors.Highlight
+        Me.BunifuFlatButton3.BackColor = System.Drawing.Color.White
         Me.BunifuFlatButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BunifuFlatButton3.BorderRadius = 0
         Me.BunifuFlatButton3.ButtonText = "  关闭所有office进程"
@@ -119,9 +119,9 @@ Partial Class Form1
         Me.BunifuFlatButton3.IconVisible = True
         Me.BunifuFlatButton3.IconZoom = 90.0R
         Me.BunifuFlatButton3.IsTab = False
-        Me.BunifuFlatButton3.Location = New System.Drawing.Point(0, 205)
+        Me.BunifuFlatButton3.Location = New System.Drawing.Point(0, 185)
         Me.BunifuFlatButton3.Name = "BunifuFlatButton3"
-        Me.BunifuFlatButton3.Normalcolor = System.Drawing.SystemColors.Highlight
+        Me.BunifuFlatButton3.Normalcolor = System.Drawing.Color.White
         Me.BunifuFlatButton3.OnHovercolor = System.Drawing.SystemColors.ActiveBorder
         Me.BunifuFlatButton3.OnHoverTextColor = System.Drawing.Color.White
         Me.BunifuFlatButton3.selected = False
@@ -135,7 +135,7 @@ Partial Class Form1
         'BunifuFlatButton1
         '
         Me.BunifuFlatButton1.Activecolor = System.Drawing.SystemColors.ActiveCaption
-        Me.BunifuFlatButton1.BackColor = System.Drawing.SystemColors.Highlight
+        Me.BunifuFlatButton1.BackColor = System.Drawing.Color.White
         Me.BunifuFlatButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BunifuFlatButton1.BorderRadius = 0
         Me.BunifuFlatButton1.ButtonText = "  选波"
@@ -153,9 +153,9 @@ Partial Class Form1
         Me.BunifuFlatButton1.IconVisible = True
         Me.BunifuFlatButton1.IconZoom = 90.0R
         Me.BunifuFlatButton1.IsTab = False
-        Me.BunifuFlatButton1.Location = New System.Drawing.Point(0, 75)
+        Me.BunifuFlatButton1.Location = New System.Drawing.Point(0, 34)
         Me.BunifuFlatButton1.Name = "BunifuFlatButton1"
-        Me.BunifuFlatButton1.Normalcolor = System.Drawing.SystemColors.Highlight
+        Me.BunifuFlatButton1.Normalcolor = System.Drawing.Color.White
         Me.BunifuFlatButton1.OnHovercolor = System.Drawing.SystemColors.ActiveBorder
         Me.BunifuFlatButton1.OnHoverTextColor = System.Drawing.Color.White
         Me.BunifuFlatButton1.selected = False
@@ -168,6 +168,7 @@ Partial Class Form1
         '
         'Panel3
         '
+        Me.Panel3.BackColor = System.Drawing.Color.White
         Me.Panel3.Controls.Add(Me.BunifuFlatButton4)
         Me.Panel3.Controls.Add(Me.BunifuFlatButton2)
         Me.Panel3.Controls.Add(Me.TextBox1)
@@ -180,7 +181,7 @@ Partial Class Form1
         'BunifuFlatButton4
         '
         Me.BunifuFlatButton4.Activecolor = System.Drawing.SystemColors.Highlight
-        Me.BunifuFlatButton4.BackColor = System.Drawing.SystemColors.Highlight
+        Me.BunifuFlatButton4.BackColor = System.Drawing.Color.White
         Me.BunifuFlatButton4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BunifuFlatButton4.BorderRadius = 0
         Me.BunifuFlatButton4.ButtonText = "选择文件"
@@ -198,9 +199,9 @@ Partial Class Form1
         Me.BunifuFlatButton4.IconVisible = True
         Me.BunifuFlatButton4.IconZoom = 90.0R
         Me.BunifuFlatButton4.IsTab = False
-        Me.BunifuFlatButton4.Location = New System.Drawing.Point(49, 27)
+        Me.BunifuFlatButton4.Location = New System.Drawing.Point(24, 34)
         Me.BunifuFlatButton4.Name = "BunifuFlatButton4"
-        Me.BunifuFlatButton4.Normalcolor = System.Drawing.SystemColors.Highlight
+        Me.BunifuFlatButton4.Normalcolor = System.Drawing.Color.White
         Me.BunifuFlatButton4.OnHovercolor = System.Drawing.SystemColors.ActiveBorder
         Me.BunifuFlatButton4.OnHoverTextColor = System.Drawing.Color.Black
         Me.BunifuFlatButton4.selected = False
@@ -214,7 +215,7 @@ Partial Class Form1
         'BunifuFlatButton2
         '
         Me.BunifuFlatButton2.Activecolor = System.Drawing.SystemColors.Highlight
-        Me.BunifuFlatButton2.BackColor = System.Drawing.SystemColors.Highlight
+        Me.BunifuFlatButton2.BackColor = System.Drawing.Color.White
         Me.BunifuFlatButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BunifuFlatButton2.BorderRadius = 0
         Me.BunifuFlatButton2.ButtonText = "生成到WORD"
@@ -232,9 +233,9 @@ Partial Class Form1
         Me.BunifuFlatButton2.IconVisible = True
         Me.BunifuFlatButton2.IconZoom = 90.0R
         Me.BunifuFlatButton2.IsTab = False
-        Me.BunifuFlatButton2.Location = New System.Drawing.Point(49, 182)
+        Me.BunifuFlatButton2.Location = New System.Drawing.Point(24, 189)
         Me.BunifuFlatButton2.Name = "BunifuFlatButton2"
-        Me.BunifuFlatButton2.Normalcolor = System.Drawing.SystemColors.Highlight
+        Me.BunifuFlatButton2.Normalcolor = System.Drawing.Color.White
         Me.BunifuFlatButton2.OnHovercolor = System.Drawing.SystemColors.ActiveBorder
         Me.BunifuFlatButton2.OnHoverTextColor = System.Drawing.Color.Black
         Me.BunifuFlatButton2.selected = False
@@ -247,7 +248,8 @@ Partial Class Form1
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(49, 114)
+        Me.TextBox1.BackColor = System.Drawing.Color.White
+        Me.TextBox1.Location = New System.Drawing.Point(24, 121)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
         Me.TextBox1.Size = New System.Drawing.Size(200, 21)
