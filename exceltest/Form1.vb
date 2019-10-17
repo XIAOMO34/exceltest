@@ -24,9 +24,11 @@ Public Class Form1
         ReleaseCapture()
         SendMessage(Me.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0)
     End Sub
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
     Private Sub BunifuFlatButton2_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton2.Click
         'Try
         '    myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
@@ -51,11 +53,11 @@ Public Class Form1
             End If
         End Try
     End Sub
-    'Function Step21()  ''对已经打开的表格操作,此处用函数不用进程来选择性调用！！
-    '    myexcel.WindowState = -4137 ''全屏
-    '    myworkbook = myexcel.ActiveWorkbook
-    '    myworksheet = myworkbook.Worksheets("myworkbook.Sheet1")
-    'End Function
+    Function Step21()  ''对已经打开的表格操作,此处用函数不用进程来选择性调用！！
+        myexcel.WindowState = -4137 ''全屏
+        myworkbook = myexcel.ActiveWorkbook
+        myworksheet = myworkbook.Worksheets("myworkbook.Sheet1")
+    End Function
     Function Openexcel() ''重新打开EXCEL顶级对象APPLICATION
         If OpenFileDialog1.FileName = "OpenFileDialog1" Then
             MessageBox.Show("请先选择文件！")
@@ -156,5 +158,30 @@ Public Class Form1
         Next
         Nts = s
     End Function
+    Function Openetabs() ''操作ETABS文档到WORD中并且处理数据
+        myword = CreateObject("Word.Application")
+        myword.Visible = True
+        myworddoc = myword.Documents.Open("C:\Users\LJX\Desktop\报告程序\ETABS文件.Docx")
+        myworddoc.Tables(1).Select()
+        myword.Selection.WholeStory() ''选中所有内容
+        myword.Selection.Copy()
+        myexcel = CreateObject("Excel.Application")
+        myexcel.Visible = True
+        myworkbook = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\报告程序\数据文件.xlsx")
+        myworksheet = myworkbook.Worksheets("ETABS") ''copy到ETABS的sheet中
+        myworksheet.Cells.Select()
+        myexcel.Selection.ClearContents
+        myworksheet.Range("A1").Select()
+        myexcel.ActiveSheet.paste ''粘贴
+        REG = myworksheet.UsedRange
+        For Each i In REG
+            If i.value Like "Story Forces" Then
 
+            End If
+        Next
+    End Function
+
+    Private Sub BunifuFlatButton5_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton5.Click
+        Openetabs()
+    End Sub
 End Class
