@@ -15,6 +15,9 @@ Public Class Form1
     Dim x2 As Integer ''楼层角所在行数
     Dim x1 As Integer ''楼层力所在行数
     Dim y As Integer ''列数
+    Dim P As Process（） ''excel进程
+    Dim q As Process（） ''word进程
+    Dim er As Integer ''错误处理
     ''窗口移动
     ''Private Declare Sub Sleep Lib "kernel32" Alias "Sleep" (ByVal dwMilliseconds As Long)暂停程序，单位：毫秒
     Public Declare Function SendMessage Lib "user32" Alias "SendMessageA" _
@@ -110,11 +113,11 @@ Public Class Form1
     End Sub
     Private Sub BunifuFlatButton3_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton3.Click
         ''关闭excel进程，释放内存
-        Dim p As Process() = Process.GetProcessesByName("EXCEL")
+        P = Process.GetProcessesByName("EXCEL")
         For Each pr As Process In p
             pr.Kill()
         Next
-        Dim q As Process() = Process.GetProcessesByName("WINWORD")
+        q = Process.GetProcessesByName("WINWORD")
         For Each i As Process In q
             i.Kill()
         Next
@@ -295,13 +298,14 @@ Public Class Form1
         myexcel.Visible = True
         myword = CreateObject("Word.application")
         myword.Visible = True
-        Openetabs()
-        Opensheet()
+        er = 0
+        If er <> 1 Then
+            Openetabs()
+            Opensheet()
+        End If
     End Sub
 
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
 
-    End Sub
 
     Private Sub BunifuFlatButton6_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton6.Click
         OpenFileDialog2.Filter = "所有文件|*.*" ''文件筛选器
