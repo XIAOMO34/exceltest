@@ -311,7 +311,7 @@ Public Class Form1
         OpenFileDialog2.Filter = "所有文件|*.*" ''文件筛选器
         OpenFileDialog2.ShowDialog()
         If OpenFileDialog2.FileName <> "OpenFileDialog2" Then
-            TextBox2.Text = "文件已选择：" & OpenFileDialog2.FileName
+            TextBox2.Text = "文件已选择：" & OpenFileDialog2.FileName '1
         End If
     End Sub
 
