@@ -39,7 +39,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub BunifuFlatButton2_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton2.Click
+    Private Sub BunifuFlatButton2_Click(sender As Object, e As EventArgs) 
         'Try
         '    myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
         '    ''获得已经打开的EXCEL对象
@@ -58,7 +58,7 @@ Public Class Form1
                 MessageBox.Show("请先选择文件！")
             Else
                 Openexcel()
-                Wmassout()
+                'Wmassout()
                 'Wzq()
             End If
         End Try
@@ -79,34 +79,34 @@ Public Class Form1
         myworkbook = myexcel.Workbooks.Open(OpenFileDialog1.FileName)
 
     End Function
-    Function Wmassout() ''读取Wmass文件中信息
-        ''myworkbook = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\新建 Microsoft Excel 工作表.xlsx")
-        myworksheet1 = myworkbook.Worksheets("Sheet1")
-        myexcel.ReferenceStyle = -4150
-        reg = myworksheet1.UsedRange ''EXCEL所用区域（类似于有数据的区域）
-        For Each i In reg ''REG为所有单元格，遍历单元格
-            If i.VALUE Like "* 恒载质量    活载质量*" Then ''当出现* 恒载质量    活载质量*时
-                ''停止遍历,*为通配符
-                y = i.column
-                myworksheet1.Range(Nts(y) & (i.row + 2) & ":" & Nts(y) & (i.row + 3)).Copy()
-                myworksheet1.Range("A1000").Select()
-                myworkbook.ActiveSheet.PASTE ''复制所需的数据并进行处理
-                myexcel.Selection.texttocolumns(,,,,,,, True,,,,,,)
-                myworksheet1.Range("K1000").Select()
-                myexcel.ActiveCell.FormulaR1C1 = "=RC[-5]+RC[-4]"
-                myworksheet1.Range("K1000").Select()
-                Exit For ''跳出循环
-            End If
-        Next
-        c = 0
-        reg = myworksheet1.Range("F1000:F2000")
-        For Each j In reg ''C为楼层数，对任意层数具有通用性
-            If j.VALUE IsNot Nothing Then
-                c = c + 1
-            End If
-        Next
-        myexcel.Selection.AutoFill(myworksheet1.Range("K1000:K" & (999 + c)))
-    End Function
+    'Function Wmassout() ''读取Wmass文件中信息
+    '    ''myworkbook = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\新建 Microsoft Excel 工作表.xlsx")
+    '    myworksheet1 = myworkbook.Worksheets("Sheet1")
+    '    myexcel.ReferenceStyle = -4150
+    '    reg = myworksheet1.UsedRange ''EXCEL所用区域（类似于有数据的区域）
+    '    For Each i In reg ''REG为所有单元格，遍历单元格
+    '        If i.VALUE Like "* 恒载质量    活载质量*" Then ''当出现* 恒载质量    活载质量*时
+    '            ''停止遍历,*为通配符
+    '            y = i.column
+    '            myworksheet1.Range(Nts(y) & (i.row + 2) & ":" & Nts(y) & (i.row + 3)).Copy()
+    '            myworksheet1.Range("A1000").Select()
+    '            myworkbook.ActiveSheet.PASTE ''复制所需的数据并进行处理
+    '            myexcel.Selection.texttocolumns(,,,,,,, True,,,,,,)
+    '            myworksheet1.Range("K1000").Select()
+    '            myexcel.ActiveCell.FormulaR1C1 = "=RC[-5]+RC[-4]"
+    '            myworksheet1.Range("K1000").Select()
+    '            Exit For ''跳出循环
+    '        End If
+    '    Next
+    '    c = 2
+    '    reg = myworksheet1.Range("F1000:F2000")
+    '    For Each j In reg ''C为楼层数，对任意层数具有通用性
+    '        If j.VALUE IsNot Nothing Then
+    '            c = c + 1
+    '        End If
+    '    Next
+    '    myexcel.Selection.AutoFill(myworksheet1.Range("K1000:K" & (999 + c)))
+    'End Function
 
     Private Sub BunifuImageButton1_Click(sender As Object, e As EventArgs) Handles BunifuImageButton1.Click
         Me.Close()
@@ -174,11 +174,11 @@ Public Class Form1
     End Function
     Function Openetabs() ''操作ETABS文档到WORD中并且处理数据
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''处理层间力程序
-        myworddoc = myword.Documents.Open("C:\Users\LJX\Desktop\报告程序\ETABS文件.Docx")
+        myworddoc = myword.Documents.Open(OpenFileDialog1.FileName)
         myworddoc.Tables(1).Select()
         myword.Selection.WholeStory() ''选中所有内容
         myword.Selection.Copy()
-        myworkbook = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\报告程序\数据文件.xlsx")
+        myworkbook = myexcel.Workbooks.Open(OpenFileDialog2.FileName)
         myworksheet1 = myworkbook.Worksheets("ETABS") ''copy到ETABS的sheet中
         myworksheet1.Cells.Select()
         myexcel.Selection.ClearContents
@@ -189,7 +189,7 @@ Public Class Form1
             If i.value Like "*楼层力" Then ''找到楼层力所在区域
                 x1 = i.ROW
                 y = i.COLUMN
-                c = 2
+                c = TextBox4.Text
                 If myworksheet1.Range("A" & x1 + 1&).Value Like "*Story Forces" Then
                     'MessageBox.Show(1)                   
                     Exit For
@@ -226,7 +226,6 @@ Public Class Form1
             If i.value Like "*层间位移角" Then ''找到楼层角所在区域
                 x2 = i.ROW
                 y = i.COLUMN
-                c = 2
                 If myworksheet1.Range("A" & x2 + 1&).Value Like "*Story Drifts" Then
                     'MessageBox.Show(1)                   
                     Exit For
@@ -266,13 +265,12 @@ Public Class Form1
         Next
     End Function
     Function Opensheet()
-        myworkbook2 = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\报告程序\表格文件.xlsx")
+        myworkbook2 = myexcel.Workbooks.Open(OpenFileDialog3.FileName)
         myworksheet2 = myworkbook2.Worksheets("Sheet1")
         cc = 1
-        For cc = 1 To c
+        For cc = 1 To c - 1
             myworksheet2.Range("F3:T3").Select() ''根据层数扩充表格4.2~4.5
             myexcel.Selection.EntireRow.Insert(0)
-            cc = cc + 1
         Next
         cc = 0
         ccc = 0
@@ -321,5 +319,14 @@ Public Class Form1
         If OpenFileDialog3.FileName <> "OpenFileDialog3" Then
             TextBox3.Text = "文件已选择：" & OpenFileDialog3.FileName
         End If
+    End Sub
+
+    Private Sub BunifuFlatButton1_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton1.Click
+        Panel3.Show()
+        Panel4.Hide()
+    End Sub
+
+    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
+
     End Sub
 End Class
