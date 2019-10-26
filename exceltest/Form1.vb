@@ -265,6 +265,7 @@ Public Class Form1
         Next
     End Function
     Function Opensheet()
+        c = TextBox4.Text
         myworkbook2 = myexcel.Workbooks.Open(OpenFileDialog3.FileName)
         myworksheet2 = myworkbook2.Worksheets("Sheet1")
         cc = 1
@@ -272,6 +273,9 @@ Public Class Form1
             myworksheet2.Range("F3:T3").Select() ''根据层数扩充表格4.2~4.5
             myexcel.Selection.EntireRow.Insert(0)
         Next
+        myworksheet2.Range("F2:T" & (2 + c)).Copy()
+        myworksheet2.Cells(c + 4, 6).select()
+        myexcel.ActiveSheet.paste()
         cc = 0
         ccc = 0
         For cc = 0 To 8 Step 8
@@ -288,6 +292,11 @@ Public Class Form1
             myexcel.Selection.PASTESPECIAL(-4163,,,)
             ccc = 48
         Next
+
+
+    End Function
+    Function Diwuzhang()
+
     End Function
 
 
@@ -298,7 +307,7 @@ Public Class Form1
         myword.Visible = True
         er = 0
         If er <> 1 Then
-            Openetabs()
+            'Openetabs()
             Opensheet()
         End If
     End Sub
