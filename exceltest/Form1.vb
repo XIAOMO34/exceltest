@@ -39,7 +39,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub BunifuFlatButton2_Click(sender As Object, e As EventArgs) 
+    Private Sub BunifuFlatButton2_Click(sender As Object, e As EventArgs)
         'Try
         '    myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
         '    ''获得已经打开的EXCEL对象
@@ -58,16 +58,9 @@ Public Class Form1
                 MessageBox.Show("请先选择文件！")
             Else
                 Openexcel()
-                'Wmassout()
-                'Wzq()
             End If
         End Try
     End Sub
-    Function Step21()  ''对已经打开的表格操作,此处用函数不用进程来选择性调用！！
-        myexcel.WindowState = -4137 ''全屏
-        myworkbook = myexcel.ActiveWorkbook
-        myworksheet1 = myworkbook.Worksheets("myworkbook.Sheet1")
-    End Function
     Function Openexcel() ''重新打开EXCEL顶级对象APPLICATION
         If OpenFileDialog1.FileName = "OpenFileDialog1" Then
             MessageBox.Show("请先选择文件！")
@@ -77,37 +70,7 @@ Public Class Form1
         myexcel.Visible = True
         myexcel.WindowState = -4137 ''全屏
         myworkbook = myexcel.Workbooks.Open(OpenFileDialog1.FileName)
-
     End Function
-    'Function Wmassout() ''读取Wmass文件中信息
-    '    ''myworkbook = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\新建 Microsoft Excel 工作表.xlsx")
-    '    myworksheet1 = myworkbook.Worksheets("Sheet1")
-    '    myexcel.ReferenceStyle = -4150
-    '    reg = myworksheet1.UsedRange ''EXCEL所用区域（类似于有数据的区域）
-    '    For Each i In reg ''REG为所有单元格，遍历单元格
-    '        If i.VALUE Like "* 恒载质量    活载质量*" Then ''当出现* 恒载质量    活载质量*时
-    '            ''停止遍历,*为通配符
-    '            y = i.column
-    '            myworksheet1.Range(Nts(y) & (i.row + 2) & ":" & Nts(y) & (i.row + 3)).Copy()
-    '            myworksheet1.Range("A1000").Select()
-    '            myworkbook.ActiveSheet.PASTE ''复制所需的数据并进行处理
-    '            myexcel.Selection.texttocolumns(,,,,,,, True,,,,,,)
-    '            myworksheet1.Range("K1000").Select()
-    '            myexcel.ActiveCell.FormulaR1C1 = "=RC[-5]+RC[-4]"
-    '            myworksheet1.Range("K1000").Select()
-    '            Exit For ''跳出循环
-    '        End If
-    '    Next
-    '    c = 2
-    '    reg = myworksheet1.Range("F1000:F2000")
-    '    For Each j In reg ''C为楼层数，对任意层数具有通用性
-    '        If j.VALUE IsNot Nothing Then
-    '            c = c + 1
-    '        End If
-    '    Next
-    '    myexcel.Selection.AutoFill(myworksheet1.Range("K1000:K" & (999 + c)))
-    'End Function
-
     Private Sub BunifuImageButton1_Click(sender As Object, e As EventArgs) Handles BunifuImageButton1.Click
         Me.Close()
     End Sub
@@ -123,14 +86,6 @@ Public Class Form1
         Next
     End Sub
 
-
-    Private Sub BunifuFlatButton4_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton4.Click
-        OpenFileDialog1.Filter = "所有文件|*.*" ''文件筛选器
-        OpenFileDialog1.ShowDialog()
-        If OpenFileDialog1.FileName <> "OpenFileDialog1" Then
-            TextBox1.Text = "文件已选择：" & OpenFileDialog1.FileName
-        End If
-    End Sub
     Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
 
     End Sub
@@ -264,7 +219,7 @@ Public Class Form1
             End If
         Next
     End Function
-    Function Opensheet()
+    Function Opensheet2()
         c = TextBox4.Text
         myworkbook2 = myexcel.Workbooks.Open(OpenFileDialog3.FileName)
         myworksheet2 = myworkbook2.Worksheets("Sheet1")
@@ -273,9 +228,14 @@ Public Class Form1
             myworksheet2.Range("F3:T3").Select() ''根据层数扩充表格4.2~4.5
             myexcel.Selection.EntireRow.Insert(0)
         Next
-        myworksheet2.Range("F2:T" & (2 + c)).Copy()
-        myworksheet2.Cells(c + 4, 6).select()
-        myexcel.ActiveSheet.paste()
+        cc = 0
+        For cc = 0 To 48 Step 16
+            myworksheet2.Range("F2:T" & (2 + c)).Copy()
+            myworksheet2.Cells(c + 4, 6 + cc).select()
+            myexcel.ActiveSheet.paste()
+        Next
+    End Function
+    Function Disizhang()
         cc = 0
         ccc = 0
         For cc = 0 To 8 Step 8
@@ -292,14 +252,25 @@ Public Class Form1
             myexcel.Selection.PASTESPECIAL(-4163,,,)
             ccc = 48
         Next
-
-
     End Function
     Function Diwuzhang()
-
+        cc = 0
+        ccc = 0
+        For cc = 0 To 8 Step 8
+            myworksheet1.Range(Nts(11 + cc) & x1 & ":" & Nts(11 + cc + 7) & x1 + c - 1).Copy() ''通用复制到表格文件的代码
+            myworksheet2.Cells(5 + c, 7 + ccc).Select()
+            myexcel.Selection.PASTESPECIAL(-4163,,,)
+            ccc = 16
+        Next
+        cc = 0
+        ccc = 32
+        For cc = 0 To 8 Step 8
+            myworksheet1.Range(Nts(8 + cc) & x2 & ":" & Nts(8 + cc + 7) & x2 + c - 1).Copy() ''通用复制到表格文件的代码
+            myworksheet2.Cells(5 + c, 7 + ccc).Select()
+            myexcel.Selection.PASTESPECIAL(-4163,,,)
+            ccc = 48
+        Next
     End Function
-
-
     Private Sub BunifuFlatButton5_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton5.Click
         myexcel = CreateObject("Excel.application")
         myexcel.Visible = True
@@ -307,13 +278,12 @@ Public Class Form1
         myword.Visible = True
         er = 0
         If er <> 1 Then
-            'Openetabs()
-            Opensheet()
+            Openetabs()
+            Opensheet2()
+            Disizhang()
+            Diwuzhang()
         End If
     End Sub
-
-
-
     Private Sub BunifuFlatButton6_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton6.Click
         OpenFileDialog2.Filter = "所有文件|*.*" ''文件筛选器
         OpenFileDialog2.ShowDialog()
@@ -327,6 +297,13 @@ Public Class Form1
         OpenFileDialog3.ShowDialog()
         If OpenFileDialog3.FileName <> "OpenFileDialog3" Then
             TextBox3.Text = "文件已选择：" & OpenFileDialog3.FileName
+        End If
+    End Sub
+    Private Sub BunifuFlatButton4_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton4.Click
+        OpenFileDialog1.Filter = "所有文件|*.*" ''文件筛选器
+        OpenFileDialog1.ShowDialog()
+        If OpenFileDialog1.FileName <> "OpenFileDialog1" Then
+            TextBox1.Text = "文件已选择：" & OpenFileDialog1.FileName
         End If
     End Sub
 
