@@ -32,7 +32,8 @@ Partial Class Form1
         Me.BunifuFlatButton5 = New Bunifu.Framework.UI.BunifuFlatButton()
         Me.BunifuFlatButton3 = New Bunifu.Framework.UI.BunifuFlatButton()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.BunifuFlatButton2 = New Bunifu.Framework.UI.BunifuFlatButton()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
@@ -41,9 +42,11 @@ Partial Class Form1
         Me.BunifuFlatButton6 = New Bunifu.Framework.UI.BunifuFlatButton()
         Me.BunifuFlatButton4 = New Bunifu.Framework.UI.BunifuFlatButton()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Panel4 = New System.Windows.Forms.Panel()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
+        Me.OpenFileDialog4 = New System.Windows.Forms.OpenFileDialog()
         Me.Panel1.SuspendLayout()
         CType(Me.BunifuImageButton1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -213,6 +216,8 @@ Partial Class Form1
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.White
+        Me.Panel3.Controls.Add(Me.BunifuFlatButton2)
+        Me.Panel3.Controls.Add(Me.TextBox5)
         Me.Panel3.Controls.Add(Me.Label2)
         Me.Panel3.Controls.Add(Me.TextBox4)
         Me.Panel3.Controls.Add(Me.TextBox3)
@@ -227,13 +232,48 @@ Partial Class Form1
         Me.Panel3.Size = New System.Drawing.Size(600, 560)
         Me.Panel3.TabIndex = 2
         '
-        'Panel4
+        'BunifuFlatButton2
         '
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(200, 40)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(600, 560)
-        Me.Panel4.TabIndex = 12
+        Me.BunifuFlatButton2.Activecolor = System.Drawing.SystemColors.Highlight
+        Me.BunifuFlatButton2.BackColor = System.Drawing.Color.White
+        Me.BunifuFlatButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.BunifuFlatButton2.BorderRadius = 0
+        Me.BunifuFlatButton2.ButtonText = "选择ETABS减震结构报告"
+        Me.BunifuFlatButton2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BunifuFlatButton2.DisabledColor = System.Drawing.Color.Gray
+        Me.BunifuFlatButton2.Iconcolor = System.Drawing.Color.Transparent
+        Me.BunifuFlatButton2.Iconimage = Nothing
+        Me.BunifuFlatButton2.Iconimage_right = Nothing
+        Me.BunifuFlatButton2.Iconimage_right_Selected = Nothing
+        Me.BunifuFlatButton2.Iconimage_Selected = Nothing
+        Me.BunifuFlatButton2.IconMarginLeft = 0
+        Me.BunifuFlatButton2.IconMarginRight = 0
+        Me.BunifuFlatButton2.IconRightVisible = True
+        Me.BunifuFlatButton2.IconRightZoom = 0R
+        Me.BunifuFlatButton2.IconVisible = True
+        Me.BunifuFlatButton2.IconZoom = 90.0R
+        Me.BunifuFlatButton2.IsTab = False
+        Me.BunifuFlatButton2.Location = New System.Drawing.Point(24, 180)
+        Me.BunifuFlatButton2.Name = "BunifuFlatButton2"
+        Me.BunifuFlatButton2.Normalcolor = System.Drawing.Color.White
+        Me.BunifuFlatButton2.OnHovercolor = System.Drawing.SystemColors.ActiveBorder
+        Me.BunifuFlatButton2.OnHoverTextColor = System.Drawing.Color.Black
+        Me.BunifuFlatButton2.selected = False
+        Me.BunifuFlatButton2.Size = New System.Drawing.Size(200, 40)
+        Me.BunifuFlatButton2.TabIndex = 13
+        Me.BunifuFlatButton2.Text = "选择ETABS减震结构报告"
+        Me.BunifuFlatButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.BunifuFlatButton2.Textcolor = System.Drawing.Color.Black
+        Me.BunifuFlatButton2.TextFont = New System.Drawing.Font("幼圆", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        '
+        'TextBox5
+        '
+        Me.TextBox5.BackColor = System.Drawing.Color.White
+        Me.TextBox5.Location = New System.Drawing.Point(388, 199)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.ReadOnly = True
+        Me.TextBox5.Size = New System.Drawing.Size(200, 21)
+        Me.TextBox5.TabIndex = 12
         '
         'Label2
         '
@@ -246,7 +286,7 @@ Partial Class Form1
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(388, 446)
+        Me.TextBox4.Location = New System.Drawing.Point(388, 451)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(200, 21)
         Me.TextBox4.TabIndex = 10
@@ -254,7 +294,7 @@ Partial Class Form1
         'TextBox3
         '
         Me.TextBox3.BackColor = System.Drawing.Color.White
-        Me.TextBox3.Location = New System.Drawing.Point(388, 327)
+        Me.TextBox3.Location = New System.Drawing.Point(388, 379)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.ReadOnly = True
         Me.TextBox3.Size = New System.Drawing.Size(200, 21)
@@ -281,7 +321,7 @@ Partial Class Form1
         Me.BunifuFlatButton7.IconVisible = True
         Me.BunifuFlatButton7.IconZoom = 90.0R
         Me.BunifuFlatButton7.IsTab = False
-        Me.BunifuFlatButton7.Location = New System.Drawing.Point(24, 313)
+        Me.BunifuFlatButton7.Location = New System.Drawing.Point(24, 360)
         Me.BunifuFlatButton7.Name = "BunifuFlatButton7"
         Me.BunifuFlatButton7.Normalcolor = System.Drawing.Color.White
         Me.BunifuFlatButton7.OnHovercolor = System.Drawing.SystemColors.ActiveBorder
@@ -297,7 +337,7 @@ Partial Class Form1
         'TextBox2
         '
         Me.TextBox2.BackColor = System.Drawing.Color.White
-        Me.TextBox2.Location = New System.Drawing.Point(388, 215)
+        Me.TextBox2.Location = New System.Drawing.Point(388, 289)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
         Me.TextBox2.Size = New System.Drawing.Size(200, 21)
@@ -324,7 +364,7 @@ Partial Class Form1
         Me.BunifuFlatButton6.IconVisible = True
         Me.BunifuFlatButton6.IconZoom = 90.0R
         Me.BunifuFlatButton6.IsTab = False
-        Me.BunifuFlatButton6.Location = New System.Drawing.Point(24, 201)
+        Me.BunifuFlatButton6.Location = New System.Drawing.Point(24, 270)
         Me.BunifuFlatButton6.Name = "BunifuFlatButton6"
         Me.BunifuFlatButton6.Normalcolor = System.Drawing.Color.White
         Me.BunifuFlatButton6.OnHovercolor = System.Drawing.SystemColors.ActiveBorder
@@ -343,7 +383,7 @@ Partial Class Form1
         Me.BunifuFlatButton4.BackColor = System.Drawing.Color.White
         Me.BunifuFlatButton4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BunifuFlatButton4.BorderRadius = 0
-        Me.BunifuFlatButton4.ButtonText = "选择ETABS报告文件"
+        Me.BunifuFlatButton4.ButtonText = "选择ETABS非减震结构报告"
         Me.BunifuFlatButton4.Cursor = System.Windows.Forms.Cursors.Hand
         Me.BunifuFlatButton4.DisabledColor = System.Drawing.Color.Gray
         Me.BunifuFlatButton4.Iconcolor = System.Drawing.Color.Transparent
@@ -358,7 +398,7 @@ Partial Class Form1
         Me.BunifuFlatButton4.IconVisible = True
         Me.BunifuFlatButton4.IconZoom = 90.0R
         Me.BunifuFlatButton4.IsTab = False
-        Me.BunifuFlatButton4.Location = New System.Drawing.Point(24, 89)
+        Me.BunifuFlatButton4.Location = New System.Drawing.Point(24, 90)
         Me.BunifuFlatButton4.Name = "BunifuFlatButton4"
         Me.BunifuFlatButton4.Normalcolor = System.Drawing.Color.White
         Me.BunifuFlatButton4.OnHovercolor = System.Drawing.SystemColors.ActiveBorder
@@ -366,7 +406,7 @@ Partial Class Form1
         Me.BunifuFlatButton4.selected = False
         Me.BunifuFlatButton4.Size = New System.Drawing.Size(200, 40)
         Me.BunifuFlatButton4.TabIndex = 5
-        Me.BunifuFlatButton4.Text = "选择ETABS报告文件"
+        Me.BunifuFlatButton4.Text = "选择ETABS非减震结构报告"
         Me.BunifuFlatButton4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BunifuFlatButton4.Textcolor = System.Drawing.Color.Black
         Me.BunifuFlatButton4.TextFont = New System.Drawing.Font("幼圆", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
@@ -380,6 +420,14 @@ Partial Class Form1
         Me.TextBox1.Size = New System.Drawing.Size(200, 21)
         Me.TextBox1.TabIndex = 0
         '
+        'Panel4
+        '
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(200, 40)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(600, 560)
+        Me.Panel4.TabIndex = 12
+        '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
@@ -391,6 +439,10 @@ Partial Class Form1
         'OpenFileDialog3
         '
         Me.OpenFileDialog3.FileName = "OpenFileDialog1"
+        '
+        'OpenFileDialog4
+        '
+        Me.OpenFileDialog4.FileName = "OpenFileDialog1"
         '
         'Form1
         '
@@ -436,4 +488,7 @@ Partial Class Form1
     Friend WithEvents Label2 As Label
     Friend WithEvents BunifuFlatButton1 As Bunifu.Framework.UI.BunifuFlatButton
     Friend WithEvents Panel4 As Panel
+    Friend WithEvents BunifuFlatButton2 As Bunifu.Framework.UI.BunifuFlatButton
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents OpenFileDialog4 As OpenFileDialog
 End Class
