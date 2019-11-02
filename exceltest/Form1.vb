@@ -37,6 +37,35 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'c = 2
+        'myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
+        'myworksheet2 = myexcel.ActiveSheet
+        'myworksheet2.Range("A13:D15").Copy()
+        'myworksheet2.Cells(2 * c + 6, 6).select
+        'myexcel.ActiveSheet.PASTE
+        'For cc = 1 To c - 1
+        '    myworksheet2.Range("F" & 2 * c + 8 & ":I" & 2 * c + 8).Select() ''根据层数扩充表格4.2~4.5
+        '    myexcel.Selection.Insert(-4121, 0)
+        'Next
+        'For cc = 0 To 8 * (c + 5) Step c + 3
+        '    myworksheet2.Range("F" & 2 * c + 6 & ":I" & 3 * c + 7).Copy()
+        '    myworksheet2.Cells(3 * c + 9 + cc, 6).select
+        '    myexcel.ActiveSheet.paste
+        'Next
+        'ccc = 0
+        'For cc = 0 To 7
+        '    myworksheet2.Range(Nts(7 + cc) & "3:" & Nts(7 + cc) & (2 + c)).Copy()
+        '    myworksheet2.Cells(2 * c + 8 + ccc, 7).select
+        '    myexcel.ActiveSheet.paste
+        '    ccc = ccc + c + 3
+        'Next
+        'ccc = 0
+        'For cc = 0 To 7
+        '    myworksheet2.Range(Nts(7 + cc) & (2 * c + 3) & ":" & Nts(7 + cc) & (3 * c + 2)).Copy()
+        '    myworksheet2.Cells(2 * c + 8 + ccc, 8).select
+        '    myexcel.ActiveSheet.paste
+        '    ccc = ccc + c + 3
+        'Next
 
     End Sub
 
@@ -73,15 +102,16 @@ Public Class Form1
         'myworkbook = myexcel.Workbooks.Open(OpenFileDialog2.FileName)''''''''''''''''''''''''''
         'myworkbook2 = myexcel.Workbooks.Open(OpenFileDialog3.FileName)''''''''''''''''''''''''''''
         If er <> 1 Then
-            Openetabs("C:\Users\LJX\Desktop\报告程序\ETABS文件.Docx")
+            Openetabs("C:\Users\LJX\Desktop\报告程序\ETABS较多.Docx")
             'Openetabs(OpenFileDialog1.FileName)''''''''''''''''''''''''''''''''''''''
             Opensheet()
             Disizhang()
-            Openetabs("C:\Users\LJX\Desktop\报告程序\ETABS文件.Docx")
+            Openetabs("C:\Users\LJX\Desktop\报告程序\ETABS较多.Docx")
             'Openetabs(OpenFileDialog4.FileName)'''''''''''''''''''''''''''''''''''''
             'Opensheet()
             Diwuzhang()
         End If
+        Jianliduibi()
     End Sub
     Function Openexcel() ''重新打开EXCEL顶级对象APPLICATION
         If OpenFileDialog1.FileName = "OpenFileDialog1" Then
@@ -116,7 +146,7 @@ Public Class Form1
             If i.value Like "*楼层力" Then ''找到楼层力所在区域
                 x1 = i.ROW
                 y = i.COLUMN
-                c = 2
+                c = 7
                 'c = TextBox4.Text'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                 If myworksheet.Range("A" & x1 + 1&).Value Like "*Story Forces" Then
                     'MessageBox.Show(1)                   
@@ -193,14 +223,13 @@ Public Class Form1
         Next
     End Function
     Function Opensheet()
-        c = 2
         'c = TextBox4.Text''''''''''''''''''
         myworksheet2 = myworkbook2.Worksheets("Sheet1")
         myworksheet2.Activate()
         cc = 1
         For cc = 1 To c - 1
             myworksheet2.Range("F3:T3").Select() ''根据层数扩充表格4.2~4.5
-            myexcel.Selection.EntireRow.Insert(0)
+            myexcel.Selection.Insert(-4121, 0)
         Next
         cc = 0
         For cc = 0 To 48 Step 16
@@ -246,6 +275,35 @@ Public Class Form1
             ccc = 48
         Next
         myworkbook.Close()
+    End Function
+    Function Jianliduibi() ''第五章剪力对比表格
+        myworksheet2.Range("A13:D15").Copy()
+        myworksheet2.Cells(2 * c + 6, 6).select
+        myexcel.ActiveSheet.PASTE
+        For cc = 1 To c - 1
+            myworksheet2.Range("F" & 2 * c + 8 & ":I" & 2 * c + 8).Select() ''根据层数扩充表格4.2~4.5
+            myexcel.Selection.Insert(-4121, 0)
+        Next
+        For cc = 0 To 8 * (c + 5) Step c + 3
+            myworksheet2.Range("F" & 2 * c + 6 & ":I" & 3 * c + 7).Copy()
+            myworksheet2.Cells(3 * c + 9 + cc, 6).select
+            myexcel.ActiveSheet.paste
+        Next
+        ccc = 0
+        For cc = 0 To 7
+            myworksheet2.Range(Nts(7 + cc) & "3:" & Nts(7 + cc) & (2 + c)).Copy()
+            myworksheet2.Cells(2 * c + 8 + ccc, 7).select
+            myexcel.ActiveSheet.paste
+            ccc = ccc + c + 3
+        Next
+        ccc = 0
+        For cc = 0 To 7
+            myworksheet2.Range(Nts(7 + cc) & (2 * c + 3) & ":" & Nts(7 + cc) & (3 * c + 2)).Copy()
+            myworksheet2.Cells(2 * c + 8 + ccc, 8).select
+            myexcel.ActiveSheet.paste
+            ccc = ccc + c + 3
+        Next
+
     End Function
 
     Private Sub BunifuFlatButton6_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton6.Click
