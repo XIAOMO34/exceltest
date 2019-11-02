@@ -79,7 +79,7 @@ Public Class Form1
             Disizhang()
             Openetabs("C:\Users\LJX\Desktop\报告程序\ETABS文件.Docx")
             'Openetabs(OpenFileDialog4.FileName)'''''''''''''''''''''''''''''''''''''
-            Opensheet()
+            'Opensheet()
             Diwuzhang()
         End If
     End Sub
@@ -232,6 +232,7 @@ Public Class Form1
         ccc = 0
         For cc = 0 To 8 Step 8
             myworksheet.Range(Nts(11 + cc) & x1 & ":" & Nts(11 + cc + 7) & x1 + c - 1).Copy() ''通用复制到表格文件的代码
+            myworksheet2.Activate()
             myworksheet2.Cells(5 + c, 7 + ccc).Select()
             myexcel.Selection.PASTESPECIAL(-4163,,,)
             ccc = 16
