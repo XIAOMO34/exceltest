@@ -97,16 +97,16 @@ Public Class Form1
         myword = CreateObject("Word.application")
         myword.Visible = True ''常规窗口
         er = 0
-        myworkbook = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\报告程序\数据文件.xlsx")
-        myworkbook2 = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\报告程序\表格文件.xlsx")
+        myworkbook = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\杂七杂八\报告程序\数据文件.xlsx")
+        myworkbook2 = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\杂七杂八\报告程序\表格文件.xlsx")
         'myworkbook = myexcel.Workbooks.Open(OpenFileDialog2.FileName)''''''''''''''''''''''''''
         'myworkbook2 = myexcel.Workbooks.Open(OpenFileDialog3.FileName)''''''''''''''''''''''''''''
         If er <> 1 Then
-            Openetabs("C:\Users\LJX\Desktop\报告程序\ETABS较多.Docx")
+            Openetabs("C:\Users\LJX\Desktop\杂七杂八\报告程序\ETABS较多.Docx")
             'Openetabs(OpenFileDialog1.FileName)''''''''''''''''''''''''''''''''''''''
             Opensheet()
             Disizhang()
-            Openetabs("C:\Users\LJX\Desktop\报告程序\ETABS较多.Docx")
+            Openetabs("C:\Users\LJX\Desktop\杂七杂八\报告程序\ETABS较多.Docx")
             'Openetabs(OpenFileDialog4.FileName)'''''''''''''''''''''''''''''''''''''
             'Opensheet()
             Diwuzhang()
