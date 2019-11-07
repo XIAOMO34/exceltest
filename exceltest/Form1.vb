@@ -2,9 +2,8 @@
 Imports Microsoft.Office.Interop.Word
 Public Class Form1
     Dim myexcel As Microsoft.Office.Interop.Excel.Application ''excel顶级对象
-    Dim myworkbook As Microsoft.Office.Interop.Excel.Workbook ''数据文件
-    Dim myworkbook2 As Microsoft.Office.Interop.Excel.Workbook ''表格文件
-    Dim myworksheet As Microsoft.Office.Interop.Excel.Worksheet ''数据文件工作簿
+    Dim myworkbook As Microsoft.Office.Interop.Excel.Workbook ''excel处理和数据文件窗口
+    Dim myworksheet1 As Microsoft.Office.Interop.Excel.Worksheet ''数据文件工作簿
     Dim myworksheet2 As Microsoft.Office.Interop.Excel.Worksheet ''表格文件工作簿
     Dim myword As Microsoft.Office.Interop.Word.Application ''word顶级对象
     Dim myworddoc As Microsoft.Office.Interop.Word.Document ''ETABS非减震
@@ -35,70 +34,18 @@ Public Class Form1
         ReleaseCapture()
         SendMessage(Me.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0)
     End Sub
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'c = 2
         'myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
-        'myworksheet2 = myexcel.ActiveSheet
-        'myworksheet2.Range("A13:D15").Copy()
-        'myworksheet2.Cells(2 * c + 6, 6).select
-        'myexcel.ActiveSheet.PASTE
-        'For cc = 1 To c - 1
-        '    myworksheet2.Range("F" & 2 * c + 8 & ":I" & 2 * c + 8).Select() ''根据层数扩充表格4.2~4.5
-        '    myexcel.Selection.Insert(-4121, 0)
-        'Next
-        'For cc = 0 To 8 * (c + 5) Step c + 3
-        '    myworksheet2.Range("F" & 2 * c + 6 & ":I" & 3 * c + 7).Copy()
-        '    myworksheet2.Cells(3 * c + 9 + cc, 6).select
-        '    myexcel.ActiveSheet.paste
-        'Next
-        'ccc = 0
-        'For cc = 0 To 7
-        '    myworksheet2.Range(Nts(7 + cc) & "3:" & Nts(7 + cc) & (2 + c)).Copy()
-        '    myworksheet2.Cells(2 * c + 8 + ccc, 7).select
-        '    myexcel.ActiveSheet.paste
-        '    ccc = ccc + c + 3
-        'Next
-        'ccc = 0
-        'For cc = 0 To 7
-        '    myworksheet2.Range(Nts(7 + cc) & (2 * c + 3) & ":" & Nts(7 + cc) & (3 * c + 2)).Copy()
-        '    myworksheet2.Cells(2 * c + 8 + ccc, 8).select
-        '    myexcel.ActiveSheet.paste
-        '    ccc = ccc + c + 3
-        'Next
-
     End Sub
-
-    'Private Sub BunifuFlatButton2_Click(sender As Object, e As EventArgs)
-    '    'Try
-    '    '    myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
-    '    '    ''获得已经打开的EXCEL对象
-    '    '    Step21()
-    '    '    Wmassout()
-    '    '    'Duquword()
-    '    '    'Step3()
-    '    '    Me.Close()
-    '    'Catch ex As Exception
-    '    Try
-    '        myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
-    '        MessageBox.Show("EXCEL已经在运行!") ''提示已经打开EXCEL时应关闭进程
-    '        Exit Sub
-    '    Catch ex As Exception
-    '        If OpenFileDialog1.FileName = "OpenFileDialog1" Then
-    '            MessageBox.Show("请先选择文件！")
-    '        Else
-    '            Openexcel()
-    '        End If
-    '    End Try
-    'End Sub
     Private Sub BunifuFlatButton5_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton5.Click
+        'c = TextBox4.Text'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+        c = 7
         myexcel = CreateObject("Excel.application")
         myexcel.Visible = True
         myword = CreateObject("Word.application")
         myword.Visible = True ''常规窗口
         er = 0
-        myworkbook = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\杂七杂八\报告程序\数据文件.xlsx")
-        myworkbook2 = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\杂七杂八\报告程序\表格文件.xlsx")
+        myworkbook = myexcel.Workbooks.Open("C:\Users\LJX\Desktop\杂七杂八\报告程序\表格文件.xlsx")
         'myworkbook = myexcel.Workbooks.Open(OpenFileDialog2.FileName)''''''''''''''''''''''''''
         'myworkbook2 = myexcel.Workbooks.Open(OpenFileDialog3.FileName)''''''''''''''''''''''''''''
         If er <> 1 Then
@@ -131,24 +78,26 @@ Public Class Form1
         'myworddoc.Tables(1).Select()
         myword.Selection.WholeStory() ''选中所有内容
         myword.Selection.Copy()
-        myworksheet = myworkbook.Worksheets("ETABS") ''copy到ETABS的sheet中
-        myworksheet.Activate()
+        myworksheet1 = myworkbook.Worksheets("处理数据") ''copy到ETABS的sheet中
+        myworksheet1.Activate()
         myexcel.WindowState = -4137
-        myworksheet.Cells.Select()
+        myworksheet1.Cells.Select()
         myexcel.Selection.ClearContents
-        myworksheet.Activate()
-        myworksheet.Cells(1, 1).Select()
-        Sleep(1000)
-        myexcel.ActiveSheet.PASTESPECIAL("HTML",,,,,,) ''粘贴
+        myworksheet1.Activate()
+        myworksheet1.Cells(1, 1).Select()
+        Do While myworksheet1.Range("A7").Value Is Nothing
+            Try
+                myexcel.ActiveSheet.PASTESPECIAL("HTML",,,,,,) ''粘贴
+            Catch ex As Exception
+            End Try
+        Loop
         myworddoc.Close()
-        reg = myworksheet.Range("A:A")
+        reg = myworksheet1.Range("A:A")
         For Each i In reg
             If i.value Like "*楼层力" Then ''找到楼层力所在区域
                 x1 = i.ROW
                 y = i.COLUMN
-                c = 7
-                'c = TextBox4.Text'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-                If myworksheet.Range("A" & x1 + 1&).Value Like "*Story Forces" Then
+                If myworksheet1.Range("A" & x1 + 1&).Value Like "*Story Forces" Then
                     'MessageBox.Show(1)                   
                     Exit For
                 End If
@@ -158,13 +107,13 @@ Public Class Form1
         For Each I In reg ''处理楼层力数据
             If I.VALUE Like "X*" Then
                 x1 = I.ROW
-                myworksheet.Range("J" & x1).Select()
+                myworksheet1.Range("J" & x1).Select()
                 myexcel.ActiveCell.FormulaR1C1 = "=MAX(RC[-5],ABS(R[" & c & "]C[-5])，ABS(RC[-4]),ABS(R[" & c & "]C[-4]))"
                 ''字符串连接应当加空格
-                myexcel.Selection.AutoFill(myworksheet.Range("J" & x1 & ":j" & x1 + c - 1), 0)
+                myexcel.Selection.AutoFill(myworksheet1.Range("J" & x1 & ":j" & x1 + c - 1), 0)
                 myexcel.Range("J" & x1 + c & ":J" & x1 + 2 * c - 1).Value = 0
-                myworksheet.Range("J" & x1 & ":J" & x1 + 2 * c - 1).Select()
-                myexcel.Selection.AutoFill(myworksheet.Range("J" & x1 & ":J" & x1 + 32 * c - 1), 0) ''填充包含原区域
+                myworksheet1.Range("J" & x1 & ":J" & x1 + 2 * c - 1).Select()
+                myexcel.Selection.AutoFill(myworksheet1.Range("J" & x1 & ":J" & x1 + 32 * c - 1), 0) ''填充包含原区域
                 Dim x3 As Integer
                 Dim C1 As Integer = 11 ''c1表示层间力表格索引
                 x3 = x1
@@ -179,12 +128,12 @@ Public Class Form1
             End If
         Next
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''处理位移角程序
-        reg = myworksheet.Range("A:A")
+        reg = myworksheet1.Range("A:A")
         For Each i In reg
             If i.value Like "*层间位移角" Then ''找到楼层角所在区域
                 x2 = i.ROW
                 y = i.COLUMN
-                If myworksheet.Range("A" & x2 + 1&).Value Like "*Story Drifts" Then
+                If myworksheet1.Range("A" & x2 + 1&).Value Like "*Story Drifts" Then
                     'MessageBox.Show(1)                   
                     Exit For
                 End If
@@ -198,21 +147,21 @@ Public Class Form1
             End If
         Next
         For i = x2 To x2 + 100 * c ''不处理数据，直接根据单元格内容导出位移角数据
-            If myworksheet.Range("B" & i).Value Like "*Max" Then
-                If myworksheet.Range("B" & i).Value Like myworksheet.Range("C" & i).Value & "*" Then
-                    myworksheet.Range("E" & i).Copy()
-                    myworksheet.Cells(i, 7).Select()
+            If myworksheet1.Range("B" & i).Value Like "*Max" Then
+                If myworksheet1.Range("B" & i).Value Like myworksheet1.Range("C" & i).Value & "*" Then
+                    myworksheet1.Range("E" & i).Copy()
+                    myworksheet1.Cells(i, 7).Select()
                     myexcel.Selection.PASTESPECIAL(-4163,,,)
                 End If
             End If
         Next
         cc = 0 ''行数
         ccc = 0 ''列数
-        reg = myworksheet.Range("G" & x2 & ":G" & x2 + 64 * c)
+        reg = myworksheet1.Range("G" & x2 & ":G" & x2 + 64 * c)
         For Each I In reg
             If I.VALUE IsNot Nothing Then
                 I.COPY
-                myworksheet.Cells(x2 + cc, 8 + ccc).select
+                myworksheet1.Cells(x2 + cc, 8 + ccc).select
                 myexcel.Selection.PASTESPECIAL(-4163,,,)
                 cc = cc + 1
             End If
@@ -224,7 +173,7 @@ Public Class Form1
     End Function
     Function Opensheet()
         'c = TextBox4.Text''''''''''''''''''
-        myworksheet2 = myworkbook2.Worksheets("Sheet1")
+        myworksheet2 = myworkbook.Worksheets("输出数据")
         myworksheet2.Activate()
         cc = 1
         For cc = 1 To c - 1
@@ -236,13 +185,15 @@ Public Class Form1
             myworksheet2.Range("F2:T" & (2 + c)).Copy()
             myworksheet2.Cells(c + 4, 6 + cc).select()
             myexcel.ActiveSheet.paste()
+            myworksheet2.Cells(2, 6 + cc).select()
+            myexcel.ActiveSheet.paste()
         Next
     End Function
     Function Disizhang()
         cc = 0
         ccc = 0
         For cc = 0 To 8 Step 8
-            myworksheet.Range(Nts(11 + cc) & x1 & ":" & Nts(11 + cc + 7) & x1 + c - 1).Copy() ''通用复制到表格文件的代码
+            myworksheet1.Range(Nts(11 + cc) & x1 & ":" & Nts(11 + cc + 7) & x1 + c - 1).Copy() ''通用复制到表格文件的代码
             myworksheet2.Cells(3, 7 + ccc).Select()
             myexcel.Selection.PASTESPECIAL(-4163,,,)
             ccc = 16
@@ -250,7 +201,7 @@ Public Class Form1
         cc = 0
         ccc = 32
         For cc = 0 To 8 Step 8
-            myworksheet.Range(Nts(8 + cc) & x2 & ":" & Nts(8 + cc + 7) & x2 + c - 1).Copy() ''通用复制到表格文件的代码
+            myworksheet1.Range(Nts(8 + cc) & x2 & ":" & Nts(8 + cc + 7) & x2 + c - 1).Copy() ''通用复制到表格文件的代码
             myworksheet2.Cells(3, 7 + ccc).Select()
             myexcel.Selection.PASTESPECIAL(-4163,,,)
             ccc = 48
@@ -260,7 +211,7 @@ Public Class Form1
         cc = 0
         ccc = 0
         For cc = 0 To 8 Step 8
-            myworksheet.Range(Nts(11 + cc) & x1 & ":" & Nts(11 + cc + 7) & x1 + c - 1).Copy() ''通用复制到表格文件的代码
+            myworksheet1.Range(Nts(11 + cc) & x1 & ":" & Nts(11 + cc + 7) & x1 + c - 1).Copy() ''通用复制到表格文件的代码
             myworksheet2.Activate()
             myworksheet2.Cells(5 + c, 7 + ccc).Select()
             myexcel.Selection.PASTESPECIAL(-4163,,,)
@@ -269,12 +220,12 @@ Public Class Form1
         cc = 0
         ccc = 32
         For cc = 0 To 8 Step 8
-            myworksheet.Range(Nts(8 + cc) & x2 & ":" & Nts(8 + cc + 7) & x2 + c - 1).Copy() ''通用复制到表格文件的代码
+            myworksheet1.Range(Nts(8 + cc) & x2 & ":" & Nts(8 + cc + 7) & x2 + c - 1).Copy() ''通用复制到表格文件的代码
             myworksheet2.Cells(5 + c, 7 + ccc).Select()
             myexcel.Selection.PASTESPECIAL(-4163,,,)
             ccc = 48
         Next
-        myworkbook.Close()
+        'myworkbook.Close()
     End Function
     Function Jianliduibi() ''第五章剪力对比表格
         myworksheet2.Range("A13:D15").Copy()
@@ -298,7 +249,7 @@ Public Class Form1
         Next
         ccc = 0
         For cc = 0 To 7
-            myworksheet2.Range(Nts(7 + cc) & (2 * c + 3) & ":" & Nts(7 + cc) & (3 * c + 2)).Copy()
+            myworksheet2.Range(Nts(7 + cc) & (c + 5) & ":" & Nts(7 + cc) & (2 * c + 4)).Copy()
             myworksheet2.Cells(2 * c + 8 + ccc, 8).select
             myexcel.ActiveSheet.paste
             ccc = ccc + c + 3
@@ -365,13 +316,14 @@ Public Class Form1
         Else
             n = n - 26
             s = "a" & Chr(Val(Mid(n, i, 2)) + Asc("a") - 1)
-        End If
+       End If
         Nts = s
     End Function
     Private Sub BunifuImageButton1_Click(sender As Object, e As EventArgs) Handles BunifuImageButton1.Click
         Me.Close()
     End Sub
 
+    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
 
-
+    End Sub
 End Class
