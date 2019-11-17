@@ -35,7 +35,8 @@ Public Class Form1
         SendMessage(Me.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0)
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
+        'myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)''重要：
+        ''获取当前已经存在的EXCEL或WORD对象
     End Sub
     Private Sub BunifuFlatButton5_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton5.Click
         'c = TextBox4.Text'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -113,7 +114,8 @@ Public Class Form1
                 myexcel.Selection.AutoFill(myworksheet1.Range("J" & x1 & ":j" & x1 + c - 1), 0)
                 myexcel.Range("J" & x1 + c & ":J" & x1 + 2 * c - 1).Value = 0
                 myworksheet1.Range("J" & x1 & ":J" & x1 + 2 * c - 1).Select()
-                myexcel.Selection.AutoFill(myworksheet1.Range("J" & x1 & ":J" & x1 + 32 * c - 1), 0) ''填充包含原区域
+                myexcel.Selection.AutoFill(myworksheet1.Range("J" & x1 & ":J" & x1 + 32 * c - 1), 0)
+                ''填充包含原区域
                 Dim x3 As Integer
                 Dim C1 As Integer = 11 ''c1表示层间力表格索引
                 x3 = x1
@@ -254,6 +256,17 @@ Public Class Form1
             myexcel.ActiveSheet.paste
             ccc = ccc + c + 3
         Next
+        reg = myexcel.Range("H" & (2 * c + 6) & ":I10000")
+        For Each I In reg
+            If I.VALUE IsNot Nothing And I.VALUE <> "5%阻尼比+阻尼器" Then
+                myexcel.Range("I" & I.ROW).FormulaR1C1 = "=RC[-1]/RC[-2]"
+            End If
+        Next
+    End Function
+    Function jianliduibi2()
+        myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
+        myworksheet1 = myexcel.ActiveSheet
+
 
     End Function
 
