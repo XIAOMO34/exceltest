@@ -230,6 +230,9 @@ Public Class Form1
         'myworkbook.Close()
     End Function
     Function Jianliduibi() ''第五章剪力对比表格
+        'myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application) ''重要：
+        'myworkbook = myexcel.ActiveWorkbook
+        'myworksheet1 = myworkbook.Worksheets("输出数据")
         myworksheet2.Range("A13:D15").Copy()
         myworksheet2.Cells(2 * c + 6, 6).select
         myexcel.ActiveSheet.PASTE
@@ -258,17 +261,17 @@ Public Class Form1
         Next
         reg = myexcel.Range("H" & (2 * c + 6) & ":I10000")
         For Each I In reg
-            If I.VALUE IsNot Nothing And I.VALUE <> "5%阻尼比+阻尼器" Then
+            If I.VALUE IsNot Nothing And TypeOf (I.VALUE) IsNot String Then
                 myexcel.Range("I" & I.ROW).FormulaR1C1 = "=RC[-1]/RC[-2]"
             End If
         Next
     End Function
-    Function jianliduibi2()
-        myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
-        myworksheet1 = myexcel.ActiveSheet
+    'Function jianliduibi2()
+    '    myexcel = CType(GetObject(, "Excel.Application"), Microsoft.Office.Interop.Excel.Application)
+    '    myworksheet1 = myexcel.ActiveSheet
 
 
-    End Function
+    'End Function
 
     Private Sub BunifuFlatButton6_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton6.Click
         OpenFileDialog2.Filter = "所有文件|*.*" ''文件筛选器
