@@ -87,8 +87,8 @@ Partial Class Form1
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(200, 40)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "阻尼器报告生成系统"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label1.Text = "报告数据处理"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'PictureBox1
         '
@@ -307,7 +307,7 @@ Partial Class Form1
         Me.BunifuFlatButton7.BackColor = System.Drawing.Color.White
         Me.BunifuFlatButton7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BunifuFlatButton7.BorderRadius = 0
-        Me.BunifuFlatButton7.ButtonText = "EXCEL表格文件"
+        Me.BunifuFlatButton7.ButtonText = "选择EXCEL表格文件"
         Me.BunifuFlatButton7.Cursor = System.Windows.Forms.Cursors.Hand
         Me.BunifuFlatButton7.DisabledColor = System.Drawing.Color.Gray
         Me.BunifuFlatButton7.Iconcolor = System.Drawing.Color.Transparent
@@ -330,7 +330,7 @@ Partial Class Form1
         Me.BunifuFlatButton7.selected = False
         Me.BunifuFlatButton7.Size = New System.Drawing.Size(200, 40)
         Me.BunifuFlatButton7.TabIndex = 8
-        Me.BunifuFlatButton7.Text = "EXCEL表格文件"
+        Me.BunifuFlatButton7.Text = "选择EXCEL表格文件"
         Me.BunifuFlatButton7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.BunifuFlatButton7.Textcolor = System.Drawing.Color.Black
         Me.BunifuFlatButton7.TextFont = New System.Drawing.Font("幼圆", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))

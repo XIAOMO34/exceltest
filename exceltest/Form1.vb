@@ -40,7 +40,7 @@ Public Class Form1
     End Sub
     Private Sub BunifuFlatButton5_Click(sender As Object, e As EventArgs) Handles BunifuFlatButton5.Click
         'c = TextBox4.Text'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        c = 7
+        c = 2
         myexcel = CreateObject("Excel.application")
         myexcel.Visible = True
         myword = CreateObject("Word.application")
@@ -50,11 +50,11 @@ Public Class Form1
         'myworkbook = myexcel.Workbooks.Open(OpenFileDialog2.FileName)''''''''''''''''''''''''''
         'myworkbook2 = myexcel.Workbooks.Open(OpenFileDialog3.FileName)''''''''''''''''''''''''''''
         If er <> 1 Then
-            Openetabs("C:\Users\LJX\Desktop\杂七杂八\报告程序\ETABS较多.Docx")
+            Openetabs("C:\Users\LJX\Desktop\杂七杂八\报告程序\ETABS文件.Docx")
             'Openetabs(OpenFileDialog1.FileName)''''''''''''''''''''''''''''''''''''''
             Opensheet()
             Disizhang()
-            Openetabs("C:\Users\LJX\Desktop\杂七杂八\报告程序\ETABS较多.Docx")
+            Openetabs("C:\Users\LJX\Desktop\杂七杂八\报告程序\ETABS文件.Docx")
             'Openetabs(OpenFileDialog4.FileName)'''''''''''''''''''''''''''''''''''''
             'Opensheet()
             Diwuzhang()
@@ -110,7 +110,7 @@ Public Class Form1
                 x1 = I.ROW
                 myworksheet1.Range("J" & x1).Select()
                 myexcel.ActiveCell.FormulaR1C1 = "=MAX(RC[-5],ABS(R[" & c & "]C[-5])，ABS(RC[-4]),ABS(R[" & c & "]C[-4]))"
-                ''字符串连接应当加空格
+                ''字符串连接应当加空格（重要）
                 myexcel.Selection.AutoFill(myworksheet1.Range("J" & x1 & ":j" & x1 + c - 1), 0)
                 myexcel.Range("J" & x1 + c & ":J" & x1 + 2 * c - 1).Value = 0
                 myworksheet1.Range("J" & x1 & ":J" & x1 + 2 * c - 1).Select()
@@ -240,13 +240,13 @@ Public Class Form1
             myworksheet2.Range("F" & 2 * c + 8 & ":I" & 2 * c + 8).Select() ''根据层数扩充表格4.2~4.5
             myexcel.Selection.Insert(-4121, 0)
         Next
-        For cc = 0 To 8 * (c + 5) Step c + 3
+        For cc = 0 To 14 * (c + 3) Step c + 3 ''复制剪力对比表格
             myworksheet2.Range("F" & 2 * c + 6 & ":I" & 3 * c + 7).Copy()
             myworksheet2.Cells(3 * c + 9 + cc, 6).select
             myexcel.ActiveSheet.paste
         Next
         ccc = 0
-        For cc = 0 To 7
+        For cc = 0 To 7 ''填充剪力对比表格
             myworksheet2.Range(Nts(7 + cc) & "3:" & Nts(7 + cc) & (2 + c)).Copy()
             myworksheet2.Cells(2 * c + 8 + ccc, 7).select
             myexcel.ActiveSheet.paste
@@ -259,7 +259,24 @@ Public Class Form1
             myexcel.ActiveSheet.paste
             ccc = ccc + c + 3
         Next
-        reg = myexcel.Range("H" & (2 * c + 6) & ":I10000")
+
+        'myexcel.Range("I" & (2 * c + 6) & ":I" & (14 * c + 40)).Select()
+        'myexcel.Selection.NumberFormatLocal = "0.00%"
+        ccc = 0
+        For cc = 0 To 7 ''填充剪力对比表格
+            myworksheet2.Range(Nts(23 + cc) & "3:" & Nts(23 + cc) & (2 + c)).Copy()
+            myworksheet2.Cells(10 * c + 32 + ccc, 7).select
+            myexcel.ActiveSheet.paste
+            ccc = ccc + c + 3
+        Next
+        ccc = 0
+        For cc = 0 To 7
+            myworksheet2.Range(Nts(23 + cc) & (c + 5) & ":" & Nts(23 + cc) & (2 * c + 4)).Copy()
+            myworksheet2.Cells(10 * c + 32 + ccc, 8).select
+            myexcel.ActiveSheet.paste
+            ccc = ccc + c + 3
+        Next
+        reg = myexcel.Range("H" & (2 * c + 6) & ":I" & (22 * c + 50))
         For Each I In reg
             If I.VALUE IsNot Nothing And TypeOf (I.VALUE) IsNot String Then
                 myexcel.Range("I" & I.ROW).FormulaR1C1 = "=RC[-1]/RC[-2]"
